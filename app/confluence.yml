@@ -5,7 +5,7 @@ settings:
   verbose: false
   check-updates: false    # disable bzt check for updates
   env:
-    application_hostname: test_confluence_instance.atlassian.com   # Confluence DC hostname without protocol, port and postfix e.g. test-confluence.atlassian.com or localhost
+    application_hostname: abab5cb2632074e6d867dac027914f04-971377540.us-east-2.elb.amazonaws.com   # Confluence DC hostname without protocol, port and postfix e.g. test-confluence.atlassian.com or localhost
     application_protocol: http        # http or https
     application_port: 80              # 80, 443, 8080, 1990, etc
     secure: True                      # Set False to allow insecure connections, e.g. when using self-signed SSL certificate
@@ -85,7 +85,9 @@ scenarios:
       perc_view_attachment: ${view_attachment}
       perc_upload_attachment: ${upload_attachment}
       perc_like_page: ${like_page}
+      perc_quick_edit_page: ${quick_edit_page}
       perc_standalone_extension: ${standalone_extension}
+
 modules:
   consolidator:
     rtimes-len: 0 # CONFSRVDEV-7631 reduce sampling
