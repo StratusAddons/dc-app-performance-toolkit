@@ -5,7 +5,7 @@ settings:
   verbose: false
   check-updates: false    # disable bzt check for updates
   env:
-    application_hostname: abab5cb2632074e6d867dac027914f04-971377540.us-east-2.elb.amazonaws.com   # Confluence DC hostname without protocol, port and postfix e.g. test-confluence.atlassian.com or localhost
+    application_hostname: test_confluence_instance.atlassian.com   # Confluence DC hostname without protocol, port and postfix e.g. test-confluence.atlassian.com or localhost
     application_protocol: http        # http or https
     application_port: 80              # 80, 443, 8080, 1990, etc
     secure: True                      # Set False to allow insecure connections, e.g. when using self-signed SSL certificate
@@ -23,19 +23,19 @@ settings:
     allow_analytics: Yes              # Allow sending basic run analytics to Atlassian. These analytics help us to understand how the tool is being used and help us to continue to invest in this tooling. For more details please see our README.
     # Action percentage for JMeter and Locust load executors
     extended_metrics: False
-    view_page: 46
-    view_dashboard: 8
-    view_blog: 10
-    search_cql: 9
-    create_blog: 3
-    create_and_edit_page: 7
-    comment_page: 6
-    view_attachment: 4
-    upload_attachment: 5
-    like_page: 2
-    standalone_extension: 10 # By default disabled
+    view_page: 35
+    view_dashboard: 9
+    view_blog: 13
+    search_cql: 10
+    create_blog: 4
+    create_and_edit_page: 8
+    comment_page: 7
+    view_attachment: 5
+    upload_attachment: 6
+    like_page: 3
+    standalone_extension: 0 # By default disabled
     # Custom dataset section.
-    custom_dataset_query: title ~ 'AppPage*' # Write CQL query to add CQL output to the app/datasets/confluence/custom_pages.csv, e.g. "title ~ 'AppPage*'"
+    custom_dataset_query:           # Write CQL query to add CQL output to the app/datasets/confluence/custom_pages.csv, e.g. "title ~ 'AppPage*'"
 services:
   - module: shellexec
     prepare:
@@ -85,9 +85,7 @@ scenarios:
       perc_view_attachment: ${view_attachment}
       perc_upload_attachment: ${upload_attachment}
       perc_like_page: ${like_page}
-      perc_quick_edit_page: ${quick_edit_page}
       perc_standalone_extension: ${standalone_extension}
-
 modules:
   consolidator:
     rtimes-len: 0 # CONFSRVDEV-7631 reduce sampling
@@ -117,7 +115,7 @@ modules:
       httpsampler.ignore_failed_embedded_resources: "true"
   selenium:
     chromedriver:
-      version: "107.0.5304.62" # Supports Chrome version 107. You can refer to http://chromedriver.chromium.org/downloads
+      version: "108.0.5359.71" # Supports Chrome version 108. You can refer to http://chromedriver.chromium.org/downloads
 reporting:
 - data-source: sample-labels
   module: junit-xml
